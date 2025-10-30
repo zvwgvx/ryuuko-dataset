@@ -34,7 +34,7 @@ def count_tokens(text: str, model: str = "gpt-3.5-turbo") -> int:
 
 
 def analyze_dataset_tokens(jsonl_file: str) -> dict:
-    """Analyze token counts in dataset (no system prompt)"""
+    """Analyze token counts in dataset-old (no system prompt)"""
     total_tokens = 0
     total_conversations = 0
     user_tokens = 0
@@ -64,7 +64,7 @@ def analyze_dataset_tokens(jsonl_file: str) -> dict:
 
 
 def create_clean_dataset(jsonl_file: str):
-    """Create a clean, human-readable version of the dataset"""
+    """Create a clean, human-readable version of the dataset-old"""
     clean_file = jsonl_file.replace('.jsonl', '_clean.json')
 
     data = []
@@ -139,7 +139,7 @@ def csv_to_jsonl(csv_file: str, output_file: str):
 
 
 def create_train_test_split(jsonl_file: str, test_ratio: float = 0.1):
-    """Split dataset into train and test sets"""
+    """Split dataset-old into train and test sets"""
     with open(jsonl_file, 'r', encoding='utf-8') as f:
         data = [json.loads(line) for line in f]
 
@@ -195,8 +195,8 @@ def main():
     print("🚀 Ryuuko Dataset Converter - CSV to JSONL\n")
 
     # Paths
-    csv_file = "dataset/dataset.csv"
-    output_file = "dataset/dataset.jsonl"
+    csv_file = "dataset-old/base.csv"
+    output_file = "dataset-old/dataset-old.jsonl"
 
     # Check if files exist
     if not Path(csv_file).exists():
@@ -211,7 +211,7 @@ def main():
     preview_jsonl(output_file, num_samples=3)
 
     # Create train/test split
-    print("\n📊 Splitting dataset into train/test sets...")
+    print("\n📊 Splitting dataset-old into train/test sets...")
     train_file, test_file = create_train_test_split(output_file, test_ratio=0.1)
 
     # Create clean version
@@ -243,7 +243,7 @@ def main():
 
     print(f"\n✅ Completed! Total {total} conversations")
     print("\nGenerated files:")
-    print(f"  📄 {output_file} (full dataset - JSONL for training)")
+    print(f"  📄 {output_file} (full dataset-old - JSONL for training)")
     print(f"  📄 {clean_file} (clean readable version - JSON)")
     print(f"  📄 {train_file} (training set - JSONL)")
     print(f"  📄 {train_file.replace('.jsonl', '_clean.json')} (training set - clean)")
